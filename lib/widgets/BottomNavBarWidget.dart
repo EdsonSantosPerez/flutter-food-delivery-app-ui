@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_app/widgets/profile_screen.dart';
+import 'package:flutter_app/pages/profile/profile_screen.dart';
+import 'package:flutter_app/pages/HomePage.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   @override
@@ -8,13 +9,30 @@ class BottomNavBarWidget extends StatefulWidget {
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
+  // navigateToScreens method is used to navigate to different screens
+  void navigateToScreens(int index) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      // console index
+      print(index);
+      // if index is 0 then navigate to HomePage
+      // if index is 3 then navigate to UserProfilePage
+      if (index == 0) {
+        return HomePage();
+      } else if (index == 3) {
+        return ProfileScreen();
+      } else {
+        return HomePage();
+      }
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     int _selectedIndex = 0;
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
-//        navigateToScreens(index);
+        navigateToScreens(index);
       });
     }
 
@@ -23,37 +41,19 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text(
-            'Home',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
-          ),
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.near_me),
-          title: Text(
-            'Near By',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
-          ),
+          label: 'Near By',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.card_giftcard),
-          title: Text(
-            'Cart',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
-          ),
+          label: 'Cart',
         ),
         BottomNavigationBarItem(
           icon: Icon(FontAwesomeIcons.user),
-          title: Text(
-            'Account',
-            style: TextStyle(color: Color(0xFF2c2b2b)),
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
-            );
-          },
+          label: 'Account',
         ),
       ],
       currentIndex: _selectedIndex,
