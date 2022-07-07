@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_app/widgets/profile_screen.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   @override
@@ -47,6 +48,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             'Account',
             style: TextStyle(color: Color(0xFF2c2b2b)),
           ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+            );
+          },
         ),
       ],
       currentIndex: _selectedIndex,
